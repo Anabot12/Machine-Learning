@@ -1,0 +1,25 @@
+from sklearn.linear_model import LogisticRegression 
+from sklearn.model_selection import train_test_split 
+from sklearn import metrics 
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plot 
+
+diab_df = pd.read_csv("diabetes.csv") 
+diab_df.head()
+#split dataset in features and target variable 
+diab_cols = ['Pregnancies', 'Insulin', 'BMI', 'Age','Glucose','BloodPressure','DiabetesPedigreeFunction'] 
+X = diab_df[diab_cols]# Features 
+y = diab_df.Outcome # Target variable 
+
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.25,random_state=0) 
+
+# instantiate the model 
+logreg =  LogisticRegression(solver='liblinear') 
+# fit the model with data 
+logreg.fit(X_train,y_train) 
+# predicting 
+y_pred=logreg.predict(X_test) 
+y_pred 
+
+
